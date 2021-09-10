@@ -2,7 +2,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 //Pages
 import UsersList from "./pages/UsersList/index";
-import User from "./pages/User";
+import User from "./pages/User/index";
 
 function App() {
   return (

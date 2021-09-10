@@ -16,8 +16,18 @@ export const mapUsersData = (users) => {
  * @param {*} user
  * @returns Object
  */
-export const mapUserData = (user) => ({
-  userId: user.id,
-  userName: user.login,
-  avatarSrc: user.avatar_url,
+export const mapUserData = ({
+  id,
+  login,
+  avatar_url,
+  following,
+  public_repos,
+  name,
+}) => ({
+  userId: id,
+  userName: login,
+  avatarSrc: avatar_url,
+  rating: following,
+  reposNumber: public_repos,
+  name,
 });

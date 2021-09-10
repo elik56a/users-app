@@ -1,4 +1,4 @@
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { Backdrop, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({
@@ -6,9 +6,17 @@ const useStyles = makeStyles({
     margin: "1rem auto",
     display: "block",
   },
+  backdrop: {
+    zIndex: 2,
+    color: "#fff",
+  },
 });
 
 export default function Loader() {
   const classes = useStyles();
-  return <CircularProgress className={classes.loader} size={80} />;
+  return (
+    <Backdrop className={classes.backdrop} open={true}>
+      <CircularProgress size={80} />
+    </Backdrop>
+  );
 }

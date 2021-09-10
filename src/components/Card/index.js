@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
   CardActionArea,
@@ -10,28 +9,23 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import STRINGS from "../constants/strings";
+import STRINGS from "../../constants/strings";
 import { Link } from "react-router-dom";
+import UserInfo from "../UserInfo";
 
-const useStyles = makeStyles({
-  card: {
-    margin: "1rem 2rem",
-    textAlign: "center",
-  },
-  avatar: {
-    width: 250,
-    height: 250,
-    display: "block",
-    margin: "0 auto",
-  },
-  button: {
-    display: "block",
-    margin: "0 auto",
-  },
-});
+// Styles
+import useStyles from "./styles";
 
-export default function CommonCard({ userName, avatarSrc }) {
+export default function UserCard({
+  userName,
+  avatarSrc,
+  toShowMoreInfo = false,
+}) {
   const classes = useStyles();
+
+  const renderUserInfo = () => {
+    return userName && <UserInfo />;
+  };
 
   return (
     <Card className={classes.card}>
@@ -40,6 +34,7 @@ export default function CommonCard({ userName, avatarSrc }) {
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {userName}
+            {toShowMoreInfo && renderUserInfo()}
           </Typography>
         </CardContent>
       </CardActionArea>

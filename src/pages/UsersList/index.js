@@ -7,23 +7,23 @@ import { isScrolledToBottom } from "../../utils/helper";
 import { useUsersStore } from "../../hooks/stores";
 
 // Components
-import CommonCard from "../../components/Card";
+import UserCard from "../../components/Card/index";
 import Loader from "../../components/Loader";
+
 // Styles
 import useStyles from "./styles";
 
 const UsersList = () => {
-  const usersStore = useUsersStore();
-  const { users, isLoading } = usersStore;
+  const { users, isLoading, getUsers } = useUsersStore();
   const classes = useStyles();
 
   // when page loads - to fetch the users from api
-  useEffect(() => usersStore.getUsers(), []);
+  useEffect(() => getUsers(), [getUsers]);
 
   const onUserScroll = ({ target }) => {
     const isBottom = isScrolledToBottom(target);
     if (isBottom) {
-      usersStore.getUsers();
+      getUsers();
     }
   };
 
@@ -33,7 +33,7 @@ const UsersList = () => {
         {users.map(({ userId, userName, avatarSrc }) => {
           return (
             <Grid item sm={4} key={userId}>
-              <CommonCard avatarSrc={avatarSrc} userName={userName} />
+              <UserCard avatarSrc={avatarSrc} userName={userName} />
             </Grid>
           );
         })}

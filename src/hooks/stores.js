@@ -15,7 +15,7 @@ export const useStores = () => useContext(RootStoreContext);
  */
 export const useUsersStore = () => {
   const { usersStore } = useStores();
-  return usersStore;
+  return { ...usersStore };
 };
 
 /**
@@ -24,5 +24,5 @@ export const useUsersStore = () => {
  */
 export const useUserStore = () => {
   const { userStore } = useStores();
-  return userStore;
+  return { ...userStore };
 };
