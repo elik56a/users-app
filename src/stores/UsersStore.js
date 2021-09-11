@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 //Functions
-import { getGithubUsers } from "../api/users";
+import { getGithubUsers } from "../api";
 import { mapUsersData } from "../utils/mapData";
 
 export class UsersStore {

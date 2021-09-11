@@ -1,27 +1,18 @@
 import { observer } from "mobx-react-lite";
 import Rating from "@material-ui/lab/Rating";
 import { Typography, Box } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+
 // Hooks
-import { useUserStore } from "../hooks/stores";
+import { useUserProfileStore } from "../../hooks/stores";
 
 // Constant
-import STRINGS from "../constants/strings";
+import STRINGS from "../../constants/strings";
 
-const useStyles = makeStyles({
-  root: {
-    width: 350,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  infoItem: {
-    margin: "1rem",
-  },
-});
+// Styles
+import useStyles from "./styles";
 
 const UserInfo = () => {
-  const { user } = useUserStore();
+  const { user } = useUserProfileStore();
   const { rating, reposNumber, name } = user;
   const classes = useStyles();
 

@@ -1,16 +1,7 @@
 import { Backdrop, CircularProgress } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles({
-  loader: {
-    margin: "1rem auto",
-    display: "block",
-  },
-  backdrop: {
-    zIndex: 2,
-    color: "#fff",
-  },
-});
+// Styles
+import useStyles from "./styles";
 
 export default function Loader() {
   const classes = useStyles();

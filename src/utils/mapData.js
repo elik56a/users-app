@@ -1,7 +1,7 @@
 /**
  * This function get a users array data, and format the vars names, and omit unused props
  * @param {*} users
- * @returns Array
+ * @returns Array - list of users formatted data
  */
 export const mapUsersData = (users) => {
   return users.map((user) => ({
@@ -16,7 +16,7 @@ export const mapUsersData = (users) => {
  * @param {*} user
  * @returns Object
  */
-export const mapUserData = ({
+export const mapUserProfileData = ({
   id,
   login,
   avatar_url,

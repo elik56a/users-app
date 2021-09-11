@@ -1,1 +1,1 @@
-export const apiBaseUrl = "https://api.github.com";
+export const apiBaseUrl = process.env.REACT_APP_API_URL;

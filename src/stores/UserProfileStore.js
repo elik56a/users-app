@@ -1,10 +1,10 @@
 import { makeAutoObservable } from "mobx";
 
 //Functions
-import { getSpecificUser } from "../api/user";
-import { mapUserData } from "../utils/mapData";
+import { getUserProfile } from "../api";
+import { mapUserProfileData } from "../utils/mapData";
 
-export class UserStore {
+export class UserProfileStore {
   user = {};
   isLoading = true;
 
@@ -15,17 +15,21 @@ export class UserStore {
   // actions
   getUser = async (userName) => {
     this.setIsLoading(true);
-    const newUsers = await getSpecificUser(userName);
-    this.setUser(newUsers);
+    const userProfile = await getUserProfile(userName);
+    this.setUser(userProfile);
     this.setIsLoading(false);
   };
 
   setUser = (newUser) => {
-    const cleanUserData = mapUserData(newUser);
+    const cleanUserData = mapUserProfileData(newUser);
     this.user = cleanUserData;
   };
 
   setIsLoading = (isLoading) => {
     this.isLoading = isLoading;
+  };
+
+  resetUserProfile = () => {
+    this.user = {};
   };
 }

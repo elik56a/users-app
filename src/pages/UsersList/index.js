@@ -8,7 +8,7 @@ import { useUsersStore } from "../../hooks/stores";
 
 // Components
 import UserCard from "../../components/Card/index";
-import Loader from "../../components/Loader";
+import Loader from "../../components/Loader/index";
 
 // Styles
 import useStyles from "./styles";
@@ -18,7 +18,11 @@ const UsersList = () => {
   const classes = useStyles();
 
   // when page loads - to fetch the users from api
-  useEffect(() => getUsers(), [getUsers]);
+  useEffect(() => {
+    if (!users.length) {
+      getUsers();
+    }
+  }, [getUsers, users.length]);
 
   const onUserScroll = ({ target }) => {
     const isBottom = isScrolledToBottom(target);
