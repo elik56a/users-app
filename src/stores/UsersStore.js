@@ -23,6 +23,8 @@ export class UsersStore {
   };
 
   setUsers = (newUsers) => {
+    if (!newUsers?.length) return;
+
     const cleanUsersData = mapUsersData(newUsers);
     this.users.push(...cleanUsersData);
   };

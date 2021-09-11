@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-//Functions
+// Functions
 import { getUserProfile } from "../api";
 import { mapUserProfileData } from "../utils/mapData";
 

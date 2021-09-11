@@ -16,5 +16,5 @@ made with React.js , Mobx, React-Router, Material Ui
 # 🚀 How to get started
 
 1. Run in your cmd: `git clone https://github.com/elik56a/users-app`
-2. Install all packages with `npm i` or `
+2. Install all packages with `npm i`
 3. Finally run code with `npm run start`

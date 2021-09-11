@@ -4,5 +4,5 @@
  * @returns {Boolean} - if user is at end of page
  */
 export const isScrolledToBottom = (node) => {
-  return node.scrollHeight - node.scrollTop - node.clientHeight < 10;
+  return node.scrollHeight - node.scrollTop - node.clientHeight < 50;
 };

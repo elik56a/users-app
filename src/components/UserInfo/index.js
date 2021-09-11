@@ -22,7 +22,7 @@ const UserInfo = () => {
         <Rating name="rating" value={rating} disabled />
         <Box>
           <Typography>
-            <small>({rating}) </small>
+            <small> ({rating}) </small>
           </Typography>
         </Box>
       </div>

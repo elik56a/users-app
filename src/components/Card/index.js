@@ -6,14 +6,17 @@ import {
   Typography,
 } from "@material-ui/core";
 
+// Constants
+import STRINGS from "../../constants/strings";
+
 // Components
 import UserInfo from "../UserInfo/index";
-import ActionButtons from "../ActionButtons";
+import LinkButton from "../LinkButton";
 
 // Styles
 import useStyles from "./styles";
 
-const UserCard = ({ userName, avatarSrc, toShowMoreInfo = false }) => {
+const UserCard = ({ userName, avatarSrc, toShowFullProfile = false }) => {
   const classes = useStyles();
 
   const renderUserInfo = () => {
@@ -26,12 +29,14 @@ const UserCard = ({ userName, avatarSrc, toShowMoreInfo = false }) => {
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
           {userName}
-          {toShowMoreInfo && renderUserInfo()}
+          {toShowFullProfile && renderUserInfo()}
         </Typography>
       </CardContent>
-      <CardActions>
-        <ActionButtons />
-      </CardActions>
+      {!toShowFullProfile && (
+        <CardActions>
+          <LinkButton linkPath={`user/${userName}`} text={STRINGS.MORE_INFO} />
+        </CardActions>
+      )}
     </Card>
   );
 };

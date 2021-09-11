@@ -28,7 +28,7 @@ const UserProfile = () => {
     return (
       <div className={classes.cardContainer}>
         <UserCard
-          toShowMoreInfo
+          toShowFullProfile
           avatarSrc={user.avatarSrc}
           userName={user.userName}
         />

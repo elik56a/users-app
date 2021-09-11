@@ -1,23 +1,21 @@
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-// Constants
-import STRINGS from "../../constants/strings";
-
 // Styles
-import useStyles from "../Loader/styles";
+import useStyles from "./styles";
 
-const ActionButtons = ({ userName }) => {
+const ActionButtons = ({ linkPath, text }) => {
   const classes = useStyles();
 
   return (
     <Button
       component={Link}
-      to={`/user/${userName}`}
+      to={linkPath}
       className={classes.button}
       color="primary"
+      variant="outlined"
     >
-      {STRINGS.MORE_INFO}
+      {text}
     </Button>
   );
 };
