@@ -1,8 +1,8 @@
 /**
- * This function is determined if user richened to the bottom of the app
- * @param {*} node
- * @returns {Boolean} - if user is at end of page
+ * This function get an array as argument, and return the last item in array
+ * @param {Array} - array of data
+ * @returns {*} - last item in array
  */
-export const isScrolledToBottom = (node) => {
-  return node.scrollHeight - node.scrollTop - node.clientHeight < 50;
+export const getLastItemInArray = (array) => {
+  return array.slice(-1).pop();
 };

@@ -1,9 +1,11 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 // Functions
 import { getUserProfile } from "../api";
-import { mapUserProfileData } from "../utils/mapData";
+import { convertApiUserProfile } from "../utils/convertData";
 
+// Constants
+import STRINGS from "../constants/strings";
 export class UserProfileStore {
   user = {};
   isLoading = true;
@@ -14,15 +16,21 @@ export class UserProfileStore {
 
   // actions
   getUser = async (userName) => {
-    this.setIsLoading(true);
-    const userProfile = await getUserProfile(userName);
-    this.setUser(userProfile);
-    this.setIsLoading(false);
+    try {
+      this.setIsLoading(true);
+      const userProfile = await getUserProfile(userName);
+      runInAction(() => {
+        this.setUser(userProfile);
+        this.setIsLoading(false);
+      });
+    } catch (e) {
+      alert(STRINGS.ERROR_FETCH_USER);
+    }
   };
 
   setUser = (newUser) => {
-    const cleanUserData = mapUserProfileData(newUser);
-    this.user = cleanUserData;
+    const convertedUser = convertApiUserProfile(newUser);
+    this.user = convertedUser;
   };
 
   setIsLoading = (isLoading) => {

@@ -1,55 +1,49 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
-import { Grid } from "@material-ui/core";
+import { Grid, Container } from "@material-ui/core";
 
 // Functions
-import { isScrolledToBottom } from "../../utils/helper";
-import { useUsersStore } from "../../hooks/stores";
+import { useUsersStore } from "../../hooks/useStore";
 
 // Components
-import UserCard from "../../components/Card/index";
-import Loader from "../../components/Loader/index";
-
-// Styles
-import useStyles from "./styles";
+import UserCard from "../../components/Card";
+import Loader from "../../components/Loader";
+import { useIsAtBottom } from "./../../hooks/useIsAtBottom";
 
 const UsersList = () => {
   const { users, isLoading, getUsers } = useUsersStore();
-  const classes = useStyles();
+  const observerRef = useRef();
+  const lastCardElementRef = useIsAtBottom(observerRef, isLoading, getUsers);
 
-  // when page loads - to fetch the users from api
+  // when page loads - to fetch the users from api, but only if there is not users at all
   useEffect(() => {
     if (!users.length) {
       getUsers();
     }
-  }, [getUsers, users.length]);
+  }, [getUsers, users]);
 
-  const onUserScroll = ({ target }) => {
-    const isBottom = isScrolledToBottom(target);
-    if (isBottom) {
-      getUsers();
-    }
-  };
-
-  const renderUsersList = () => {
-    return (
-      <Grid container justifyContent="center">
-        {users.map(({ userId, userName, avatarSrc }) => {
-          return (
-            <Grid item sm={4} key={userId}>
-              <UserCard avatarSrc={avatarSrc} userName={userName} />
-            </Grid>
-          );
-        })}
+  const renderUsersList = () =>
+    users.map(({ userId, userName, avatarSrc }, index) => (
+      <Grid item xs={12} sm={6} md={4} key={userId}>
+        {users.length === index + 1 ? (
+          <UserCard
+            ref={lastCardElementRef}
+            avatarSrc={avatarSrc}
+            userName={userName}
+          />
+        ) : (
+          <UserCard avatarSrc={avatarSrc} userName={userName} />
+        )}
       </Grid>
-    );
-  };
+    ));
 
   return (
-    <div onScroll={onUserScroll} className={classes.pageContainer}>
-      {renderUsersList()}
-      {isLoading && <Loader />}
-    </div>
+    <Container>
+      <Grid container>
+        {renderUsersList()}
+        {isLoading && <Loader />}
+      </Grid>
+    </Container>
   );
 };
 

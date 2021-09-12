@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import { observer } from "mobx-react-lite";
+import { Grid } from "@material-ui/core";
 
 // Functions
-import { useUserProfileStore } from "../../hooks/stores";
+import { useUserProfileStore } from "../../hooks/useStore";
 
 // Components
-import Loader from "../../components/Loader/index";
-import UserCard from "../../components/Card/index";
+import Loader from "../../components/Loader";
+import UserCard from "../../components/Card";
 
 // Styles
 import useStyles from "./styles";
@@ -24,23 +25,21 @@ const UserProfile = () => {
     return () => resetUserProfile();
   }, [getUser, resetUserProfile, userName]);
 
-  const renderUserCard = () => {
-    return (
-      <div className={classes.cardContainer}>
-        <UserCard
-          toShowFullProfile
-          avatarSrc={user.avatarSrc}
-          userName={user.userName}
-        />
-      </div>
-    );
-  };
+  const renderUserCard = () => (
+    <Grid container className={classes.cardContainer}>
+      <UserCard
+        toShowUserInfo
+        avatarSrc={user.avatarSrc}
+        userName={user.userName}
+      />
+    </Grid>
+  );
 
   return (
-    <div className={classes.pageContainer}>
+    <Grid container className={classes.pageContainer}>
       {user && renderUserCard()}
       {isLoading && <Loader />}
-    </div>
+    </Grid>
   );
 };
 

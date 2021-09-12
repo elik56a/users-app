@@ -3,7 +3,7 @@ import Rating from "@material-ui/lab/Rating";
 import { Typography, Box } from "@material-ui/core";
 
 // Hooks
-import { useUserProfileStore } from "../../hooks/stores";
+import { useUserProfileStore } from "../../hooks/useStore";
 
 // Constant
 import STRINGS from "../../constants/strings";
@@ -19,7 +19,7 @@ const UserInfo = () => {
   return (
     <div>
       <div className={classes.root}>
-        <Rating name="rating" value={rating} disabled />
+        <Rating name="rating" value={rating || 0} disabled />
         <Box>
           <Typography>
             <small> ({rating}) </small>

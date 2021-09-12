@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // Styles
 import useStyles from "./styles";
 
-const ActionButtons = ({ linkPath, text }) => {
+const LinkButton = ({ linkPath, text }) => {
   const classes = useStyles();
 
   return (
@@ -20,4 +20,4 @@ const ActionButtons = ({ linkPath, text }) => {
   );
 };
 
-export default ActionButtons;
+export default LinkButton;

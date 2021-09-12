@@ -5,24 +5,25 @@ import { RootStoreContext } from "../stores/StoresProvider";
 
 /**
  *  this is a hook that return all available store in the app
- * @returns {Object} - the users store
+ * @returns {Object} - all app stores
  */
-export const useStores = () => useContext(RootStoreContext);
+const useStores = () => useContext(RootStoreContext);
 
 /**
  *  this is a hook that return the user store
  * @returns {Object} - user profile store
+ *
  */
 export const useUsersStore = () => {
   const { usersStore } = useStores();
-  return { ...usersStore };
+  return usersStore;
 };
 
 /**
- *  this is a hook that return the user store
- * @returns {Object}
+ *  this is a hook that return the user profile store
+ * @returns {Object} - user profile store
  */
 export const useUserProfileStore = () => {
   const { userProfileStore } = useStores();
-  return { ...userProfileStore };
+  return userProfileStore;
 };

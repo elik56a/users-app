@@ -1,18 +1,10 @@
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import Routes from "./routes";
+import { StoresProvider } from "./stores/StoresProvider";
 
-//Pages
-import UsersList from "./pages/UsersList/index";
-import UserProfile from "./pages/UserProfile/index";
-
-function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={UsersList} />
-        <Route exact path="/user/:userName" component={UserProfile} />
-      </Switch>
-    </Router>
-  );
-}
+const App = () => (
+  <StoresProvider>
+    <Routes />
+  </StoresProvider>
+);
 
 export default App;

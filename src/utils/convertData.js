@@ -1,9 +1,9 @@
 /**
- * This function get a users array data, and format the vars names, and omit unused props
+ * This function get a users array data, and format the vars names, and omit unused fields
  * @param {*} users
  * @returns {Array} - list of users formatted data
  */
-export const mapUsersData = (users) => {
+export const convertApiUsers = (users) => {
   return users.map((user) => ({
     userName: user.login,
     userId: user.id,
@@ -16,7 +16,7 @@ export const mapUsersData = (users) => {
  * @param {*} user
  * @returns {Object}
  */
-export const mapUserProfileData = ({
+export const convertApiUserProfile = ({
   id,
   login,
   avatar_url,

@@ -1,13 +1,17 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 //Functions
-import { getGithubUsers } from "../api";
-import { mapUsersData } from "../utils/mapData";
+import { getUsers as getGithubUsers } from "../api";
+import { convertApiUsers } from "../utils/convertData";
+import { getLastItemInArray } from "../utils/helper";
+
+// Constants
+import STRINGS from "../constants/strings";
 
 export class UsersStore {
   users = [];
   lastUserId = 0;
-  isLoading = true;
+  isLoading = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -15,23 +19,29 @@ export class UsersStore {
 
   // actions
   getUsers = async () => {
-    this.setIsLoading(true);
-    const newUsers = await getGithubUsers(this.lastUserId);
-    this.setUsers(newUsers);
-    this.setLastUserId();
-    this.setIsLoading(false);
+    try {
+      this.setIsLoading(true);
+      const newUsers = await getGithubUsers(this.lastUserId);
+      runInAction(() => {
+        this.setUsers(newUsers);
+        this.setLastUserId();
+        this.setIsLoading(false);
+      });
+    } catch (e) {
+      alert(STRINGS.ERROR_FETCH_USER);
+    }
   };
 
   setUsers = (newUsers) => {
-    if (!newUsers?.length) return;
+    if (newUsers?.length === 0) return;
 
-    const cleanUsersData = mapUsersData(newUsers);
-    this.users.push(...cleanUsersData);
+    const convertedUsers = convertApiUsers(newUsers);
+    this.users.push(...convertedUsers);
   };
 
   setLastUserId = () => {
-    // get the last user in the users list, and take is id, for next api call
-    const { userId } = this.users.slice(-1).pop();
+    // get the last user in the users list, and save the id, for next api call
+    const { userId } = getLastItemInArray(this.users);
     this.lastUserId = userId;
   };
 

@@ -10,11 +10,12 @@ made with React.js , Mobx, React-Router, Material Ui
 - constants: Contain app constants data, like stings.
 - pages: Contain the app pages.
 - hooks: Contain custom hooks for a better use in tha app.
+- routes: Contain app routes by domain.
 - store: Contain Mobx store.
 - utils: Contain small helper functions.
 
 # 🚀 How to get started
 
 1. Run in your cmd: `git clone https://github.com/elik56a/users-app`
-2. Install all packages with `npm i`
-3. Finally run code with `npm run start`
+2. Install all packages with `yarn install`
+3. Finally run code with `yarn start`
